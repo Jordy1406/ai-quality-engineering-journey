@@ -5,6 +5,24 @@ Format per entri: **tanggal — minggu/tahap roadmap**, lalu *Ditambahkan / Diub
 
 ---
 
+## 2026-09-25 — Minggu 1 · Push Tahap 2–4 + CI pertama
+
+### Diverifikasi
+- 3 commit baru di-push (`82f25c5..f21df02`), semua author Jordy1406, `.env` tidak ter-track:
+  1. `864cb54` docs: week 1 LLM fundamentals notes with real measurements
+  2. `6b8d70c` feat: temperature experiment + handle daily quota errors
+  3. `f21df02` test: LLM output tests (pydantic schema, forbidden content, pass rate) + CI
+- Total **6 commit** di Minggu 1, jadi target minimal 5 commit tercapai.
+
+### Catatan / kendala
+- **GitHub Actions run pertama gagal** ([run 36146987446](https://github.com/Jordy1406/ai-quality-engineering-journey/actions/runs/36146987446)). Job `offline` gagal, `live` di-skip.
+  - **Penyebab:** *"The job was not started because your account is locked due to a billing issue."* Job tidak pernah dijalankan (tidak ada step sama sekali). Ini masalah **akun GitHub**, bukan kode atau test.
+  - **Bukti kode aman:** perintah yang sama (`pytest -m "not live"`) lulus di lokal: 18 passed, 1 xfailed.
+  - **Tindak lanjut (oleh pemilik akun):** cek *GitHub → Settings → Billing and plans*, selesaikan tagihan atau metode pembayaran, lalu *Re-run jobs* di tab Actions.
+- Notice dari GitHub: label `ubuntu-latest` pindah ke Ubuntu 26 mulai 19 Okt 2026. Belum perlu tindakan, tapi pantau kalau CI tiba-tiba berubah perilaku.
+
+---
+
 ## 2026-09-25 — Minggu 1 · Tahap 4 selesai: test pytest untuk output LLM
 
 ### Ditambahkan (dibuat di awal, dibahas & dijalankan di tahap ini)
