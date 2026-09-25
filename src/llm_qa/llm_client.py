@@ -15,6 +15,10 @@ class MissingAPIKeyError(RuntimeError):
     pass
 
 
+class DailyQuotaExceededError(RuntimeError):
+    """The per-day request quota is used up. Retrying won't help until it resets."""
+
+
 @dataclass
 class LLMResponse:
     text: str
@@ -61,6 +65,11 @@ class GeminiClient:
                 resp = self._client.models.generate_content(model=self.model, contents=prompt, config=config)
                 break
             except errors.APIError as e:
+                if e.code == 429 and "PerDay" in str(e):
+                    raise DailyQuotaExceededError(
+                        f"Daily request quota for {self.model} is used up (resets at midnight Pacific time). "
+                        "Wait, switch GEMINI_MODEL, or enable billing."
+                    ) from e
                 if e.code not in RETRYABLE_STATUS or attempt == self.max_retries:
                     raise
                 wait = 2 ** attempt * 5  # 5s, 10s, 20s
@@ -82,3 +91,8 @@ class GeminiClient:
     def count_tokens(self, text: str) -> int:
         """Ask the API how many tokens a text uses (free, does not generate anything)."""
         return self._client.models.count_tokens(model=self.model, contents=text).total_tokens
+
+    def token_limits(self) -> tuple[int, int]:
+        """(context window = max input tokens, max output tokens) as reported by the API."""
+        info = self._client.models.get(model=self.model)
+        return info.input_token_limit, info.output_token_limit

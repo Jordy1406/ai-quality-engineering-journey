@@ -1,0 +1,51 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "prompt": "Berikan satu nama unik untuk aplikasi tabungan digital untuk anak muda Indonesia. Jawab hanya dengan nama aplikasinya, tanpa penjelasan.",
+  "complete": true,
+  "results": [
+    {
+      "temperature": 0.0,
+      "runs": 10,
+      "unique_answers": 6,
+      "most_common": "CelenganGenZ",
+      "most_common_count": 4,
+      "avg_similarity": 0.474,
+      "avg_latency_s": 1.11,
+      "avg_output_tokens": 3.4,
+      "answers": [
+        "CelenganGenZ",
+        "CelenganKu",
+        "Jejak",
+        "Naraku",
+        "CelenganGenZ",
+        "CelenganGenZ",
+        "CelenganGenZ",
+        "Jejak",
+        "Celenganku",
+        "Nabungin"
+      ]
+    },
+    {
+      "temperature": 1.0,
+      "runs": 10,
+      "unique_answers": 7,
+      "most_common": "SakuGenZ",
+      "most_common_count": 2,
+      "avg_similarity": 0.462,
+      "avg_latency_s": 1.18,
+      "avg_output_tokens": 3.6,
+      "answers": [
+        "SakuGenZ",
+        "TabunganAnakMuda",
+        "Celengan GenZ",
+        "Celengan",
+        "CelenganGenZ",
+        "Celengan GenZ",
+        "SakuGenZ",
+        "TabunganKu Muda",
+        "Tabura",
+        "Celengan"
+      ]
+    }
+  ]
+}
